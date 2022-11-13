@@ -1,0 +1,9 @@
+export const CHAIN_ID = 'gm_game';
+export const CHAIN_NAME =  'GM Network';
+export const TENDERMINT_RPC = 'http://localhost:26657';
+export const REST_ENDPOINT =  'http://localhost:1317';
+export const COIN_DENOM = 'GM';
+export const COIN_MINIMAL_DENOM =  'gm';
+export const COIN_DECIMALS =  6;
+export const COIN_TYPE =  118;
+export const ADDREE_PREFIX =  'gm';

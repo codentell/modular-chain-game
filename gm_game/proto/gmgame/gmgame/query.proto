@@ -51,7 +51,6 @@ message QueryParamsResponse {
 
 message QueryGetNftRequest {
 	  string index = 1;
-
 }
 
 message QueryGetNftResponse {

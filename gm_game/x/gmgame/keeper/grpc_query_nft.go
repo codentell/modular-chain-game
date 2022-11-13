@@ -3,10 +3,11 @@ package keeper
 import (
 	"context"
 
+	"gm_game/x/gmgame/types"
+
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
-	"gm_game/x/gmgame/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -43,9 +44,9 @@ func (k Keeper) Nft(c context.Context, req *types.QueryGetNftRequest) (*types.Qu
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
-	ctx := sdk.UnwrapSDKContext(c)
 
-	val, found := k.GetNft(
+	ctx := sdk.UnwrapSDKContext(c)
+	nfts, found := k.GetNft(
 		ctx,
 		req.Index,
 	)
@@ -53,5 +54,5 @@ func (k Keeper) Nft(c context.Context, req *types.QueryGetNftRequest) (*types.Qu
 		return nil, status.Error(codes.NotFound, "not found")
 	}
 
-	return &types.QueryGetNftResponse{Nft: val}, nil
+	return &types.QueryGetNftResponse{Nft: nfts}, nil
 }
