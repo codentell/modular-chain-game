@@ -33584,6 +33584,23 @@ paths:
                   properties:
                     index:
                       type: string
+                    id:
+                      type: string
+                      format: uint64
+                    name:
+                      type: string
+                    symbol:
+                      type: string
+                    description:
+                      type: string
+                    uri:
+                      type: string
+                    uriHash:
+                      type: string
+                    creator:
+                      type: string
+                    owner:
+                      type: string
               pagination:
                 type: object
                 properties:
@@ -33703,6 +33720,23 @@ paths:
                 type: object
                 properties:
                   index:
+                    type: string
+                  id:
+                    type: string
+                    format: uint64
+                  name:
+                    type: string
+                  symbol:
+                    type: string
+                  description:
+                    type: string
+                  uri:
+                    type: string
+                  uriHash:
+                    type: string
+                  creator:
+                    type: string
+                  owner:
                     type: string
         default:
           description: An unexpected error response.
@@ -69535,6 +69569,23 @@ definitions:
     properties:
       index:
         type: string
+      id:
+        type: string
+        format: uint64
+      name:
+        type: string
+      symbol:
+        type: string
+      description:
+        type: string
+      uri:
+        type: string
+      uriHash:
+        type: string
+      creator:
+        type: string
+      owner:
+        type: string
   gm_game.gmgame.Params:
     type: object
     description: Params defines the parameters for the module.
@@ -69547,6 +69598,23 @@ definitions:
           type: object
           properties:
             index:
+              type: string
+            id:
+              type: string
+              format: uint64
+            name:
+              type: string
+            symbol:
+              type: string
+            description:
+              type: string
+            uri:
+              type: string
+            uriHash:
+              type: string
+            creator:
+              type: string
+            owner:
               type: string
       pagination:
         type: object
@@ -69617,6 +69685,23 @@ definitions:
         type: object
         properties:
           index:
+            type: string
+          id:
+            type: string
+            format: uint64
+          name:
+            type: string
+          symbol:
+            type: string
+          description:
+            type: string
+          uri:
+            type: string
+          uriHash:
+            type: string
+          creator:
+            type: string
+          owner:
             type: string
   gm_game.gmgame.QueryGetScoresResponse:
     type: object

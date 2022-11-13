@@ -11,6 +11,16 @@
 
 export interface GmgameNft {
   index?: string;
+
+  /** @format uint64 */
+  id?: string;
+  name?: string;
+  symbol?: string;
+  description?: string;
+  uri?: string;
+  uriHash?: string;
+  creator?: string;
+  owner?: string;
 }
 
 /**

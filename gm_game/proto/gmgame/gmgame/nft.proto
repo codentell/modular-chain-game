@@ -5,6 +5,13 @@ option go_package = "gm_game/x/gmgame/types";
 
 message Nft {
   string index = 1; 
-  
+  uint64 id = 2;
+  string name = 3; 
+  string symbol = 4; 
+  string description = 5; 
+  string uri = 6; 
+  string uriHash = 7; 
+  string creator = 8;
+  string owner = 9;
 }
 
