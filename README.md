@@ -1,2 +1,2 @@
-# effective-chain-game
-Effective chain game
+# Modular Fellow MVP
+
