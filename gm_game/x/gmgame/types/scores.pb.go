@@ -23,7 +23,10 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type Scores struct {
-	Index string `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
+	Index     string `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
+	Id        uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	Highscore string `protobuf:"bytes,3,opt,name=highscore,proto3" json:"highscore,omitempty"`
+	Creator   string `protobuf:"bytes,4,opt,name=creator,proto3" json:"creator,omitempty"`
 }
 
 func (m *Scores) Reset()         { *m = Scores{} }
@@ -66,6 +69,27 @@ func (m *Scores) GetIndex() string {
 	return ""
 }
 
+func (m *Scores) GetId() uint64 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *Scores) GetHighscore() string {
+	if m != nil {
+		return m.Highscore
+	}
+	return ""
+}
+
+func (m *Scores) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterType((*Scores)(nil), "gm_game.gmgame.Scores")
 }
@@ -73,15 +97,18 @@ func init() {
 func init() { proto.RegisterFile("gmgame/gmgame/scores.proto", fileDescriptor_2b8212604b0256b9) }
 
 var fileDescriptor_2b8212604b0256b9 = []byte{
-	// 127 bytes of a gzipped FileDescriptorProto
+	// 176 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4a, 0xcf, 0x4d, 0x4f,
 	0xcc, 0x4d, 0xd5, 0x87, 0x52, 0xc5, 0xc9, 0xf9, 0x45, 0xa9, 0xc5, 0x7a, 0x05, 0x45, 0xf9, 0x25,
-	0xf9, 0x42, 0x7c, 0xe9, 0xb9, 0xf1, 0x20, 0x51, 0x3d, 0x88, 0xa4, 0x92, 0x1c, 0x17, 0x5b, 0x30,
+	0xf9, 0x42, 0x7c, 0xe9, 0xb9, 0xf1, 0x20, 0x51, 0x3d, 0x88, 0xa4, 0x52, 0x1a, 0x17, 0x5b, 0x30,
 	0x58, 0x5e, 0x48, 0x84, 0x8b, 0x35, 0x33, 0x2f, 0x25, 0xb5, 0x42, 0x82, 0x51, 0x81, 0x51, 0x83,
-	0x33, 0x08, 0xc2, 0x71, 0x32, 0x38, 0xf1, 0x48, 0x8e, 0xf1, 0xc2, 0x23, 0x39, 0xc6, 0x07, 0x8f,
-	0xe4, 0x18, 0x27, 0x3c, 0x96, 0x63, 0xb8, 0xf0, 0x58, 0x8e, 0xe1, 0xc6, 0x63, 0x39, 0x86, 0x28,
-	0x31, 0xa8, 0x49, 0xfa, 0x15, 0x30, 0x8b, 0x4a, 0x2a, 0x0b, 0x52, 0x8b, 0x93, 0xd8, 0xc0, 0x16,
-	0x19, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0xc4, 0xdd, 0x6a, 0x72, 0x86, 0x00, 0x00, 0x00,
+	0x33, 0x08, 0xc2, 0x11, 0xe2, 0xe3, 0x62, 0xca, 0x4c, 0x91, 0x60, 0x52, 0x60, 0xd4, 0x60, 0x09,
+	0x62, 0xca, 0x4c, 0x11, 0x92, 0xe1, 0xe2, 0xcc, 0xc8, 0x4c, 0xcf, 0x00, 0x9b, 0x29, 0xc1, 0x0c,
+	0x56, 0x89, 0x10, 0x10, 0x92, 0xe0, 0x62, 0x4f, 0x2e, 0x4a, 0x4d, 0x2c, 0xc9, 0x2f, 0x92, 0x60,
+	0x01, 0xcb, 0xc1, 0xb8, 0x4e, 0x06, 0x27, 0x1e, 0xc9, 0x31, 0x5e, 0x78, 0x24, 0xc7, 0xf8, 0xe0,
+	0x91, 0x1c, 0xe3, 0x84, 0xc7, 0x72, 0x0c, 0x17, 0x1e, 0xcb, 0x31, 0xdc, 0x78, 0x2c, 0xc7, 0x10,
+	0x25, 0x06, 0x75, 0x91, 0x7e, 0x05, 0xcc, 0xc1, 0x25, 0x95, 0x05, 0xa9, 0xc5, 0x49, 0x6c, 0x60,
+	0x07, 0x1b, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0xae, 0xa8, 0xcf, 0xe7, 0xce, 0x00, 0x00, 0x00,
 }
 
 func (m *Scores) Marshal() (dAtA []byte, err error) {
@@ -104,6 +131,25 @@ func (m *Scores) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintScores(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Highscore) > 0 {
+		i -= len(m.Highscore)
+		copy(dAtA[i:], m.Highscore)
+		i = encodeVarintScores(dAtA, i, uint64(len(m.Highscore)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if m.Id != 0 {
+		i = encodeVarintScores(dAtA, i, uint64(m.Id))
+		i--
+		dAtA[i] = 0x10
+	}
 	if len(m.Index) > 0 {
 		i -= len(m.Index)
 		copy(dAtA[i:], m.Index)
@@ -132,6 +178,17 @@ func (m *Scores) Size() (n int) {
 	var l int
 	_ = l
 	l = len(m.Index)
+	if l > 0 {
+		n += 1 + l + sovScores(uint64(l))
+	}
+	if m.Id != 0 {
+		n += 1 + sovScores(uint64(m.Id))
+	}
+	l = len(m.Highscore)
+	if l > 0 {
+		n += 1 + l + sovScores(uint64(l))
+	}
+	l = len(m.Creator)
 	if l > 0 {
 		n += 1 + l + sovScores(uint64(l))
 	}
@@ -204,6 +261,89 @@ func (m *Scores) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Index = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			m.Id = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowScores
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Id |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Highscore", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowScores
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthScores
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthScores
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Highscore = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowScores
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthScores
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthScores
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

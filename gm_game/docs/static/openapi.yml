@@ -33816,6 +33816,13 @@ paths:
                   properties:
                     index:
                       type: string
+                    id:
+                      type: string
+                      format: uint64
+                    highscore:
+                      type: string
+                    creator:
+                      type: string
               pagination:
                 type: object
                 properties:
@@ -33935,6 +33942,13 @@ paths:
                 type: object
                 properties:
                   index:
+                    type: string
+                  id:
+                    type: string
+                    format: uint64
+                  highscore:
+                    type: string
+                  creator:
                     type: string
         default:
           description: An unexpected error response.
@@ -69652,6 +69666,13 @@ definitions:
           properties:
             index:
               type: string
+            id:
+              type: string
+              format: uint64
+            highscore:
+              type: string
+            creator:
+              type: string
       pagination:
         type: object
         properties:
@@ -69711,6 +69732,13 @@ definitions:
         properties:
           index:
             type: string
+          id:
+            type: string
+            format: uint64
+          highscore:
+            type: string
+          creator:
+            type: string
   gm_game.gmgame.QueryParamsResponse:
     type: object
     properties:
@@ -69722,6 +69750,13 @@ definitions:
     type: object
     properties:
       index:
+        type: string
+      id:
+        type: string
+        format: uint64
+      highscore:
+        type: string
+      creator:
         type: string
   ibc.applications.interchain_accounts.controller.v1.Params:
     type: object

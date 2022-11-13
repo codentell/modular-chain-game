@@ -5,6 +5,8 @@ option go_package = "gm_game/x/gmgame/types";
 
 message Scores {
   string index = 1; 
-  
+  uint64 id = 2;
+  string highscore = 3; 
+  string creator = 4;
 }
 

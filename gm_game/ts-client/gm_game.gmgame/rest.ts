@@ -76,6 +76,11 @@ export interface GmgameQueryParamsResponse {
 
 export interface GmgameScores {
   index?: string;
+
+  /** @format uint64 */
+  id?: string;
+  highscore?: string;
+  creator?: string;
 }
 
 export interface ProtobufAny {
