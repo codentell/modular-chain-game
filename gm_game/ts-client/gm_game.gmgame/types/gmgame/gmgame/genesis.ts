@@ -1,23 +1,30 @@
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
+import { Nft } from "./nft";
 import { Params } from "./params";
 
 export const protobufPackage = "gm_game.gmgame";
 
 /** GenesisState defines the gmgame module's genesis state. */
 export interface GenesisState {
+  params:
+    | Params
+    | undefined;
   /** this line is used by starport scaffolding # genesis/proto/state */
-  params: Params | undefined;
+  nftList: Nft[];
 }
 
 function createBaseGenesisState(): GenesisState {
-  return { params: undefined };
+  return { params: undefined, nftList: [] };
 }
 
 export const GenesisState = {
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
+    }
+    for (const v of message.nftList) {
+      Nft.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -32,6 +39,9 @@ export const GenesisState = {
         case 1:
           message.params = Params.decode(reader, reader.uint32());
           break;
+        case 2:
+          message.nftList.push(Nft.decode(reader, reader.uint32()));
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -41,12 +51,20 @@ export const GenesisState = {
   },
 
   fromJSON(object: any): GenesisState {
-    return { params: isSet(object.params) ? Params.fromJSON(object.params) : undefined };
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      nftList: Array.isArray(object?.nftList) ? object.nftList.map((e: any) => Nft.fromJSON(e)) : [],
+    };
   },
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    if (message.nftList) {
+      obj.nftList = message.nftList.map((e) => e ? Nft.toJSON(e) : undefined);
+    } else {
+      obj.nftList = [];
+    }
     return obj;
   },
 
@@ -55,6 +73,7 @@ export const GenesisState = {
     message.params = (object.params !== undefined && object.params !== null)
       ? Params.fromPartial(object.params)
       : undefined;
+    message.nftList = object.nftList?.map((e) => Nft.fromPartial(e)) || [];
     return message;
   },
 };

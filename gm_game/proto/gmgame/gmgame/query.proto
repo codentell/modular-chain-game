@@ -5,6 +5,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "gmgame/gmgame/params.proto";
+import "gmgame/gmgame/nft.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "gm_game/x/gmgame/types";
@@ -15,7 +16,17 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/gm_game/gmgame/params";
   }
-  // this line is used by starport scaffolding # 2
+  // Queries a Nft by index.
+	rpc Nft(QueryGetNftRequest) returns (QueryGetNftResponse) {
+		option (google.api.http).get = "/gm_game/gmgame/nft/{index}";
+	}
+
+	// Queries a list of Nft items.
+	rpc NftAll(QueryAllNftRequest) returns (QueryAllNftResponse) {
+		option (google.api.http).get = "/gm_game/gmgame/nft";
+	}
+
+// this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -25,6 +36,24 @@ message QueryParamsRequest {}
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetNftRequest {
+	  string index = 1;
+
+}
+
+message QueryGetNftResponse {
+	Nft nft = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllNftRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllNftResponse {
+	repeated Nft nft = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3

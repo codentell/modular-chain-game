@@ -1,0 +1,10 @@
+syntax = "proto3";
+package gm_game.gmgame;
+
+option go_package = "gm_game/x/gmgame/types";
+
+message Nft {
+  string index = 1; 
+  
+}
+

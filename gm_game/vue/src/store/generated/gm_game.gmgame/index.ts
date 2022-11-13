@@ -1,9 +1,10 @@
 import { Client, registry, MissingWalletError } from 'gm_game-client-ts'
 
+import { Nft } from "gm_game-client-ts/gm_game.gmgame/types"
 import { Params } from "gm_game-client-ts/gm_game.gmgame/types"
 
 
-export { Params };
+export { Nft, Params };
 
 function initClient(vuexGetters) {
 	return new Client(vuexGetters['common/env/getEnv'], vuexGetters['common/wallet/signer'])
@@ -35,8 +36,11 @@ function getStructure(template) {
 const getDefaultState = () => {
 	return {
 				Params: {},
+				Nft: {},
+				NftAll: {},
 				
 				_Structure: {
+						Nft: getStructure(Nft.fromPartial({})),
 						Params: getStructure(Params.fromPartial({})),
 						
 		},
@@ -71,6 +75,18 @@ export default {
 						(<any> params).query=null
 					}
 			return state.Params[JSON.stringify(params)] ?? {}
+		},
+				getNft: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.Nft[JSON.stringify(params)] ?? {}
+		},
+				getNftAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.NftAll[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -123,6 +139,54 @@ export default {
 				return getters['getParams']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryParams API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryNft({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const client = initClient(rootGetters);
+				let value= (await client.GmGameGmgame.query.queryNft( key.index)).data
+				
+					
+				commit('QUERY', { query: 'Nft', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryNft', payload: { options: { all }, params: {...key},query }})
+				return getters['getNft']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryNft API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryNftAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const client = initClient(rootGetters);
+				let value= (await client.GmGameGmgame.query.queryNftAll(query ?? undefined)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await client.GmGameGmgame.query.queryNftAll({...query ?? {}, 'pagination.key':(<any> value).pagination.next_key} as any)).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'NftAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryNftAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getNftAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryNftAll API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

@@ -3,6 +3,7 @@ package gm_game.gmgame;
 
 import "gogoproto/gogo.proto";
 import "gmgame/gmgame/params.proto";
+import "gmgame/gmgame/nft.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "gm_game/x/gmgame/types";
@@ -10,5 +11,6 @@ option go_package = "gm_game/x/gmgame/types";
 // GenesisState defines the gmgame module's genesis state.
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
+  repeated Nft nftList = 2 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }
