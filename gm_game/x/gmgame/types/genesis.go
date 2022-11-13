@@ -10,7 +10,8 @@ const DefaultIndex uint64 = 1
 // DefaultGenesis returns the default genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		NftList: []Nft{},
+		NftList:    []Nft{},
+		ScoresList: []Scores{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -28,6 +29,16 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("duplicated index for nft")
 		}
 		nftIndexMap[index] = struct{}{}
+	}
+	// Check for duplicated index in scores
+	scoresIndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.ScoresList {
+		index := string(ScoresKey(elem.Index))
+		if _, ok := scoresIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for scores")
+		}
+		scoresIndexMap[index] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

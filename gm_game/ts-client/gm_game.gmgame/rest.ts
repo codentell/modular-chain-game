@@ -33,8 +33,27 @@ export interface GmgameQueryAllNftResponse {
   pagination?: V1Beta1PageResponse;
 }
 
+export interface GmgameQueryAllScoresResponse {
+  scores?: GmgameScores[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface GmgameQueryGetNftResponse {
   nft?: GmgameNft;
+}
+
+export interface GmgameQueryGetScoresResponse {
+  scores?: GmgameScores;
 }
 
 /**
@@ -43,6 +62,10 @@ export interface GmgameQueryGetNftResponse {
 export interface GmgameQueryParamsResponse {
   /** params holds all the parameters of this module. */
   params?: GmgameParams;
+}
+
+export interface GmgameScores {
+  index?: string;
 }
 
 export interface ProtobufAny {
@@ -306,6 +329,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryParams = (params: RequestParams = {}) =>
     this.request<GmgameQueryParamsResponse, RpcStatus>({
       path: `/gm_game/gmgame/params`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryScoresAll
+   * @summary Queries a list of Scores items.
+   * @request GET:/gm_game/gmgame/scores
+   */
+  queryScoresAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<GmgameQueryAllScoresResponse, RpcStatus>({
+      path: `/gm_game/gmgame/scores`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryScores
+   * @summary Queries a Scores by index.
+   * @request GET:/gm_game/gmgame/scores/{index}
+   */
+  queryScores = (index: string, params: RequestParams = {}) =>
+    this.request<GmgameQueryGetScoresResponse, RpcStatus>({
+      path: `/gm_game/gmgame/scores/${index}`,
       method: "GET",
       format: "json",
       ...params,

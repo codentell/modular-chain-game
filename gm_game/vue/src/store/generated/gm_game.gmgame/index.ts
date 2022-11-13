@@ -2,9 +2,10 @@ import { Client, registry, MissingWalletError } from 'gm_game-client-ts'
 
 import { Nft } from "gm_game-client-ts/gm_game.gmgame/types"
 import { Params } from "gm_game-client-ts/gm_game.gmgame/types"
+import { Scores } from "gm_game-client-ts/gm_game.gmgame/types"
 
 
-export { Nft, Params };
+export { Nft, Params, Scores };
 
 function initClient(vuexGetters) {
 	return new Client(vuexGetters['common/env/getEnv'], vuexGetters['common/wallet/signer'])
@@ -38,10 +39,13 @@ const getDefaultState = () => {
 				Params: {},
 				Nft: {},
 				NftAll: {},
+				Scores: {},
+				ScoresAll: {},
 				
 				_Structure: {
 						Nft: getStructure(Nft.fromPartial({})),
 						Params: getStructure(Params.fromPartial({})),
+						Scores: getStructure(Scores.fromPartial({})),
 						
 		},
 		_Registry: registry,
@@ -87,6 +91,18 @@ export default {
 						(<any> params).query=null
 					}
 			return state.NftAll[JSON.stringify(params)] ?? {}
+		},
+				getScores: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.Scores[JSON.stringify(params)] ?? {}
+		},
+				getScoresAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ScoresAll[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -187,6 +203,54 @@ export default {
 				return getters['getNftAll']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryNftAll API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryScores({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const client = initClient(rootGetters);
+				let value= (await client.GmGameGmgame.query.queryScores( key.index)).data
+				
+					
+				commit('QUERY', { query: 'Scores', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryScores', payload: { options: { all }, params: {...key},query }})
+				return getters['getScores']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryScores API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryScoresAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const client = initClient(rootGetters);
+				let value= (await client.GmGameGmgame.query.queryScoresAll(query ?? undefined)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await client.GmGameGmgame.query.queryScoresAll({...query ?? {}, 'pagination.key':(<any> value).pagination.next_key} as any)).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'ScoresAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryScoresAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getScoresAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryScoresAll API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},
