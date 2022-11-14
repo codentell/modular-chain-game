@@ -11,7 +11,9 @@ const (
 	RouterKey = ModuleName
 
 	// MemStoreKey defines the in-memory store key
-	MemStoreKey = "mem_modulargmgamerollup"
+	MemStoreKey    = "mem_modulargmgamerollup"
+	FellowKey      = "Fellow-value-"
+	FellowCountKey = "Fellow-count-"
 )
 
 func KeyPrefix(p string) []byte {

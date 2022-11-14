@@ -73731,6 +73731,10 @@ definitions:
       the connection handshake.
   modular_gm_game_rollup.modulargmgamerollup.MsgCreateModularFellowResponse:
     type: object
+    properties:
+      id:
+        type: string
+        format: uint64
   modular_gm_game_rollup.modulargmgamerollup.Params:
     type: object
     description: Params defines the parameters for the module.

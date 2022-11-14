@@ -2,11 +2,12 @@ syntax = "proto3";
 
 package modulargmgamerollup.modulargmgamerollup;
 
-option go_package = "modulargmgamerollup/x/modulargmgamerollup/types";
+option go_package = "modular_gm_game_rollup/x/modulargmgamerollup/types";
 
 message Fellow {
   string creator = 1;
   uint64 id = 2;
   string score = 3; 
-  string ingredients = 4; 
+  string x = 4; 
+  string y = 5;
 }

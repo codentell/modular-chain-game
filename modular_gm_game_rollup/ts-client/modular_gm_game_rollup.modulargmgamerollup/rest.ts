@@ -9,7 +9,10 @@
  * ---------------------------------------------------------------
  */
 
-export type ModulargmgamerollupMsgCreateModularFellowResponse = object;
+export interface ModulargmgamerollupMsgCreateModularFellowResponse {
+  /** @format uint64 */
+  id?: string;
+}
 
 /**
  * Params defines the parameters for the module.
@@ -156,7 +159,7 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title modulargmgamerollup/modulargmgamerollup/genesis.proto
+ * @title modulargmgamerollup/modulargmgamerollup/fellow.proto
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
