@@ -1,6 +1,15 @@
+import "dart:io";
 import 'package:flutter/material.dart';
+import 'package:flame/flame.dart';
+import 'package:flame/game.dart';
+import 'package:window_size/window_size.dart';
 
 void main() {
+   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    setWindowTitle('Modular fellow mvp');
+    setWindowMinSize(const Size(950, 700));
+    setWindowMaxSize(Size.infinite);
+  }
   runApp(const MyApp());
 }
 
