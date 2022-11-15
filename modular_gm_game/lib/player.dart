@@ -5,7 +5,7 @@ import 'package:flame/components.dart';
 import 'package:flame/input.dart';
 import 'package:flame_rive/flame_rive.dart';
 import 'package:rive/rive.dart';
-
+import 'package:process_run/shell.dart';
 import 'package:flame/collisions.dart';
 
 import "./game.dart";
@@ -27,11 +27,8 @@ class Player extends RiveComponent
             position: position,
             artboard: celestiaArtboard,
             size: Vector2(100, 100),
-            anchor: Anchor.center) {
-  }
+            anchor: Anchor.center) {}
 
-  SMIInput<bool>? _test;
-  SMIInput<bool>? _test1;
   static const double speed = 300;
   late int count = 0;
   final Vector2 velocity = Vector2.zero();
@@ -46,10 +43,7 @@ class Player extends RiveComponent
 
   @override
   Future<void>? onLoad() async {
-    // final controller1 =
-    //     StateMachineController.fromArtboard(celestiaArtboard, 'logoTrigger');
-    // _test = controller1?.findInput<bool>('isStill') as SMIBool;
-    // _test1 = controller1?.findInput<bool>('isIdle') as SMIBool;
+
     final controller = OneShotAnimation('idle', autoplay: true);
 
     celestiaArtboard.addController(controller);
@@ -63,14 +57,9 @@ class Player extends RiveComponent
       ..renderShape = true;
     add(hitbox);
 
-    //celestiaArtboard.addController(controller);
-
-    //_test!.value = true;
-
-    // print(_test!.value);
 
     scoreText = TextComponent(
-       textRenderer: textRenderer,
+      textRenderer: textRenderer,
       position: (size / 2)..y = size.y / 2 - 50,
       anchor: Anchor.bottomCenter,
     );
@@ -82,7 +71,6 @@ class Player extends RiveComponent
     );
     add(scoreText);
     add(positionText);
-
   }
 
   @override
@@ -96,7 +84,6 @@ class Player extends RiveComponent
     if (joystick.direction != JoystickDirection.idle) {
       position.add(joystick.relativeDelta * 200 * dt);
     }
-
   }
 
   @override
@@ -108,11 +95,19 @@ class Player extends RiveComponent
 
     if (other is GameCollidable) {
       print(other);
-      if(other is Rock ){
-          count+=1;
-          scoreText.text = 'Score: ${count}';
+      if (other is Rock) {
+        count += 1;
+        scoreText.text = 'Score: ${count}';
+        var shell = Shell();
+
+        shell.run('''
+
+# Send scores to onchain event for ignite to track
+go version
+
+''');
       }
-      velocity.negate();
+      //velocity.negate();
 
     }
   }

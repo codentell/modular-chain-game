@@ -41,6 +41,7 @@ dependencies:
   bonfire: ^2.11.2
   flame: ^1.4.0
   flame_rive: ^1.5.2
+  process_run: ^0.12.3+2
 
 dev_dependencies:
   flutter_test:

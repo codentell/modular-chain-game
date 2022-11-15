@@ -1,8 +1,4 @@
 import 'dart:io';
-// import 'package:corgis_app/screen/desktop/home.dart';
-// // import 'package:corgis_app/screen/desktop/map.dart';
-// import 'package:corgis_app/screen/desktop/game.dart';
-// import 'package:corgis_app/screen/desktop/pause.dart';
 import 'package:flutter/material.dart';
 import 'package:window_size/window_size.dart';
 import 'package:flame_rive/flame_rive.dart';
@@ -28,7 +24,6 @@ void main() {
   runApp(App());
 }
 
-
 class App extends StatelessWidget {
   App({Key? key}) : super(key: key);
 
@@ -37,36 +32,10 @@ class App extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-            appBar: AppBar(),
-            body: GameWidget<ModularGame>(
-              game: ModularGame(),
-              // overlayBuilderMap: {
-              //   PauseMenu.id: (context, game) => PauseMenu(gameRef: game)
-              // },
-            ),
-            // bottomNavigationBar: BottomNavigationBar(
-            //   items: const <BottomNavigationBarItem>[
-            //     BottomNavigationBarItem(
-            //       icon: Icon(Icons.home),
-            //       label: 'Home',
-            //     ),
-            //     BottomNavigationBarItem(
-            //       icon: Icon(Icons.business),
-            //       label: 'Business',
-            //     ),
-            //     BottomNavigationBarItem(
-            //       icon: Icon(Icons.school),
-            //       label: 'School',
-            //     ),
-            //   ],
-            //   //currentIndex: _selectedIndex,
-            //   selectedItemColor: Colors.amber[800],
-            //   //onTap: _onItemTapped,
-            // )
-            )
-            );
+          appBar: AppBar(),
+          body: GameWidget<ModularGame>(
+            game: ModularGame(),
+          ),
+        ));
   }
 }
-
-
-

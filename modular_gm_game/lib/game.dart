@@ -87,16 +87,10 @@ class ModularGame extends FlameGame
        position: Vector2(0, 0),
      );
 
-    //_player.anchor = Anchor.center;
-    //add(BackgroundComponent());
     add(_player);
     add(joystick);
 
-    //camera.speed = 10;
-    //camera.followComponent(_player);
 
-    //camera.followComponent(_player);
-    //camera.speed = 10;
     camera.speed = 10;
     camera.followComponent(_player, worldBounds: Map.bounds);
 
@@ -162,7 +156,7 @@ class Map extends Component {
 
   @override
   void render(Canvas canvas) {
-    print(bounds);
+  
     canvas.drawRect(bounds, _paintBg);
     //canvas.drawRect(bounds, _paintBorder);
     for (var i = 0; i < (size / 50).ceil(); i++) {
@@ -176,107 +170,6 @@ class Map extends Component {
   }
 }
 
-class Hexagon extends RiveComponent
-    with CollisionCallbacks, HasGameRef, GameCollidable, Tappable, Hoverable {
-  SMIInput<bool>? _hextest;
-
-  final Artboard hexagonArtboard;
-
-  Hexagon({
-    required this.hexagonArtboard,
-    Vector2? position,
-  }) : super(
-          artboard: hexagonArtboard,
-          position: position,
-          size: Vector2.all(200),
-          priority: 1,
-        ) {
-    initCenter();
-    initCollision();
-  }
-
-  @override
-  Future<void> onLoad() async {
-    // Artboard artboard =
-    //     await loadArtboard(RiveFile.asset('assets/hexagon.riv'));
-
-
-    final hexagonController =
-        StateMachineController.fromArtboard(hexagonArtboard, 'hexagonState');
-    _hextest = hexagonController?.findInput<bool>('isPressed');
-
-    hexagonArtboard.addController(hexagonController!);
-
-
-
-    //print(_hextest!.value);
-    _hextest!.value = false;
-
-    // _test = controller?.findInput<bool>('isStill');
-    // _test1 = controller?.findInput<bool>('isIdle');
-    // print(_test);
-
-    //OneShotAnimation('idle', autoplay: true);
-  }
-
-bool isHovered = false;
-bool onHoverEnter(PointerHoverInfo event) {
-    print("hover enter");
-     _hextest!.value = true;
-    
-    return true;
-  }
-  bool onHoverLeave(PointerHoverInfo event) {
-   print("hover leave");
-      _hextest!.value = false;
-   return true;
-  }
-
-  @override
-  bool onTapUp(_) {
-//        _hextest!.value = true;
-//        Future.delayed(const Duration(seconds: 1), () {
-//         gameRef.overlays.add(PauseMenu.id);
-// });
-
-    return true;
-  }
-
-  @override
-  bool onTapDown(_) {
-    print("Hi");
-  _hextest!.value = false;
-
-
-   
-     //  _hextest!.value = false;
-    //print(_hextest!.value);
-    // add(
-    //   ScaleEffect.by(
-    //     Vector2.all(10),
-    //     EffectController(duration: 0.3),
-    //   ),
-    // );
-    return true;
-  }
-
-  // @override
-  // bool onTapCancel(_) {
-  //   print("Hi");
-  //      _hextest!.value = false;
-
-   
-  //    //  _hextest!.value = false;
-  //   //print(_hextest!.value);
-  //   // add(
-  //   //   ScaleEffect.by(
-  //   //     Vector2.all(10),
-  //   //     EffectController(duration: 0.3),
-  //   //   ),
-  //   // );
-  //   return true;
-  // }
-}
 
 class Rock extends RiveComponent
     with CollisionCallbacks, HasGameRef, GameCollidable, Tappable {
