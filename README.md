@@ -7,10 +7,13 @@ PATH=$PATH:$(go env GOPATH)/bin
 
 ./build/celestia light start --core.ip https://limani.celestia-devops.dev --core.grpc.port 9090
 
-curl -X GET http://52.33.155.255:26658/balance
+curl -X GET http://52.26.186.106:26658/balance
 
 
-recipesd start --rollmint.aggregator true --rollmint.da_layer celestia --rollmint.da_config='{"base_url":"http://52.33.155.255:26658","timeout":60000000000,"gas_limit":6000000}' --rollmint.namespace_id 000000000000FFFF --rollmint.da_start_height 100783
+recipesd start --rollmint.aggregator true --rollmint.da_layer celestia --rollmint.da_config='{"base_url":"http://52.26.186.106:26658","timeout":60000000000,"gas_limit":6000000}' --rollmint.namespace_id 000000000000FFFF --rollmint.da_start_height 100783
+
+
+modulargamed start --rollmint.aggregator true --rollmint.da_layer celestia --rollmint.da_config='{"base_url":"http://52.26.186.106:26658","timeout":60000000000,"gas_limit":6000000}' --rollmint.namespace_id 000000000000FFFF --rollmint.da_start_height 100783
 
 ./recipesd q recipes dishes 
 
@@ -19,3 +22,7 @@ recipesd tx recipes create-recipe salad "spinach, mandarin oranges, sliced almon
 recipesd start --rollmint.aggregator true --rollmint.da_layer celestia --rollmint.da_config='{"base_url":"http://52.33.155.255:26658","timeout":60000000000,"gas_limit":6000000}' --rollmint.namespace_id 000000000000FFFF --rollmint.da_start_height 61513
 
 sudo kill -9 $(sudo lsof -t -i:8080)
+
+modulargamed tx modulargame create-fellow 0 0 0  --from alice 
+
+./modulargamed q modulargame fellows 

@@ -9,13 +9,20 @@ import "modulargame/modulargame/params.proto";
 
 option go_package = "modulargame/x/modulargame/types";
 
+import "modulargame/modulargame/fellow.proto";
+
 // Query defines the gRPC querier service.
 service Query {
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/modulargame/modulargame/params";
   }
-  // this line is used by starport scaffolding # 2
+  // Queries a list of Fellows items.
+	rpc Fellows(QueryFellowsRequest) returns (QueryFellowsResponse) {
+		option (google.api.http).get = "/modulargame/modulargame/fellows";
+	}
+
+// this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -25,6 +32,19 @@ message QueryParamsRequest {}
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryFellowsRequest {
+  // Adding pagination to request
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryFellowsResponse {
+  // Returning a list of recipes
+  repeated Fellow Fellow = 1;
+
+  // Adding pagination to response
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3
