@@ -7,7 +7,19 @@ option go_package = "modulargame/x/modulargame/types";
 
 // Msg defines the Msg service.
 service Msg {
-    // this line is used by starport scaffolding # proto/tx/rpc
+      rpc CreateFellow(MsgCreateFellow) returns (MsgCreateFellowResponse);
+// this line is used by starport scaffolding # proto/tx/rpc
+}
+
+message MsgCreateFellow {
+  string creator = 1;
+  string score = 2;
+  string x = 3;
+  string y = 4;
+}
+
+message MsgCreateFellowResponse {
+  uint64 id = 1;
 }
 
 // this line is used by starport scaffolding # proto/tx/message

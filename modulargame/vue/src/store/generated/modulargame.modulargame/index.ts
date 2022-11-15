@@ -1,9 +1,10 @@
 import { Client, registry, MissingWalletError } from 'modulargame-client-ts'
 
+import { Fellow } from "modulargame-client-ts/modulargame.modulargame/types"
 import { Params } from "modulargame-client-ts/modulargame.modulargame/types"
 
 
-export { Params };
+export { Fellow, Params };
 
 function initClient(vuexGetters) {
 	return new Client(vuexGetters['common/env/getEnv'], vuexGetters['common/wallet/signer'])
@@ -37,6 +38,7 @@ const getDefaultState = () => {
 				Params: {},
 				
 				_Structure: {
+						Fellow: getStructure(Fellow.fromPartial({})),
 						Params: getStructure(Params.fromPartial({})),
 						
 		},
@@ -128,7 +130,33 @@ export default {
 		},
 		
 		
+		async sendMsgCreateFellow({ rootGetters }, { value, fee = [], memo = '' }) {
+			try {
+				const client=await initClient(rootGetters)
+				const result = await client.ModulargameModulargame.tx.sendMsgCreateFellow({ value, fee: {amount: fee, gas: "200000"}, memo })
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgCreateFellow:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgCreateFellow:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
 		
+		async MsgCreateFellow({ rootGetters }, { value }) {
+			try {
+				const client=initClient(rootGetters)
+				const msg = await client.ModulargameModulargame.tx.msgCreateFellow({value})
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgCreateFellow:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgCreateFellow:Create Could not create message: ' + e.message)
+				}
+			}
+		},
 		
 	}
 }

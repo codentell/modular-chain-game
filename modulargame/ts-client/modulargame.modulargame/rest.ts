@@ -9,6 +9,11 @@
  * ---------------------------------------------------------------
  */
 
+export interface ModulargameMsgCreateFellowResponse {
+  /** @format uint64 */
+  id?: string;
+}
+
 /**
  * Params defines the parameters for the module.
  */
@@ -154,7 +159,7 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title modulargame/modulargame/genesis.proto
+ * @title modulargame/modulargame/fellow.proto
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {

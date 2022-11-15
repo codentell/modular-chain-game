@@ -7,10 +7,21 @@ import { msgTypes } from './registry';
 import { IgniteClient } from "../client"
 import { MissingWalletError } from "../helpers"
 import { Api } from "./rest";
+import { MsgCreateFellow } from "./types/modulargame/modulargame/tx";
 
 
-export {  };
+export { MsgCreateFellow };
 
+type sendMsgCreateFellowParams = {
+  value: MsgCreateFellow,
+  fee?: StdFee,
+  memo?: string
+};
+
+
+type msgCreateFellowParams = {
+  value: MsgCreateFellow,
+};
 
 
 export const registry = new Registry(msgTypes);
@@ -30,6 +41,28 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 
   return {
 		
+		async sendMsgCreateFellow({ value, fee, memo }: sendMsgCreateFellowParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgCreateFellow: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
+				let msg = this.msgCreateFellow({ value: MsgCreateFellow.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgCreateFellow: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		
+		msgCreateFellow({ value }: msgCreateFellowParams): EncodeObject {
+			try {
+				return { typeUrl: "/modulargame.modulargame.MsgCreateFellow", value: MsgCreateFellow.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgCreateFellow: Could not create message: ' + e.message)
+			}
+		},
 		
 	}
 };

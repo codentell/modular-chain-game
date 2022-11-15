@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package modulargame.modulargame;
+
+option go_package = "modulargame/x/modulargame/types";
+
+message Fellow {
+  string creator = 1;
+  uint64 id = 2;
+  string score = 3; 
+  string x = 4;
+  string y = 5; 
+  
+}
