@@ -1,5 +1,21 @@
 # Modular Fellow MVP
 
+# What does it do? 
+Building a small blockchain game and SDK. 
+It will use Celestia for Data Availability, Rollmint, Ignite CLI, Cosmos SDK, and Optimism in order to have a faster development in building 2d modular blockchain game. 
+
+
+# How will it be built?
+Using Flutter and Dart to create the blockchain game that is modular in Desktop both Window, MacOS and Linux and  maybe mobile devices.  
+
+What components of the Celestia stack does it interact with?
+The components of the Celestia for Data Availability, Rollmint, Ignite CLI, Cosmos SDK in order to have a faster development in building 2d modular blockchain game.
+
+
+
+
+
+
 ./build/celestia light start --node.network arabica-1
 
 PATH=$PATH:$(go env GOPATH)/bin
@@ -24,5 +40,7 @@ recipesd start --rollmint.aggregator true --rollmint.da_layer celestia --rollmin
 sudo kill -9 $(sudo lsof -t -i:8080)
 
 modulargamed tx modulargame create-fellow 0 0 0  --from alice 
+
+./modulargamed tx modulargame create-fellow 0 0 0  --from alice --yes 
 
 ./modulargamed q modulargame fellows 

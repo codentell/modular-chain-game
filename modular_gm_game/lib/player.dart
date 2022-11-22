@@ -100,10 +100,12 @@ class Player extends RiveComponent
         scoreText.text = 'Score: ${count}';
         var shell = Shell();
 
+        
+
         shell.run('''
 
 # Send scores to onchain event for ignite to track
-go version
+./modulargamed 
 
 ''');
       }
