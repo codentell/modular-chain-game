@@ -105,7 +105,8 @@ class Player extends RiveComponent
         shell.run('''
 
 # Send scores to onchain event for ignite to track
-./modulargamed 
+# modulargamed tx modulargame create-fellow ${count} ${x.toInt()} ${y.toInt()}  --from alice --yes 
+./modulargamed tx modulargame create-fellow ${count} ${x.toInt()} ${y.toInt()}  --from alice --yes 
 
 ''');
       }

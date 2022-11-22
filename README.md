@@ -1,17 +1,31 @@
 # Modular Fellow MVP
 
-# What does it do? 
-Building a small blockchain game and SDK. 
-It will use Celestia for Data Availability, Rollmint, Ignite CLI, Cosmos SDK, and Optimism in order to have a faster development in building 2d modular blockchain game. 
+## What does it do? 
+Building a small blockchain game and `SDK`. 
+It will use `Celestia` for `Data Availability`, `Rollmint`, `Ignite CLI`, `Cosmos SDK`, and `Optimism` in order to have a faster development in building 2d modular blockchain game. 
 
+## How will it be built?
+Using Flutter and Dart to create the blockchain game that is modular in Web, Desktop both Window, MacOS and Linux and  maybe android and ios.  
 
-# How will it be built?
-Using Flutter and Dart to create the blockchain game that is modular in Desktop both Window, MacOS and Linux and  maybe mobile devices.  
+## Tech Spec
 
-What components of the Celestia stack does it interact with?
-The components of the Celestia for Data Availability, Rollmint, Ignite CLI, Cosmos SDK in order to have a faster development in building 2d modular blockchain game.
+* Dart & Flutter 
 
+What components of the `Celestia stack` does it interact with?
+The components of the `Celestia stack` for this project: 
 
+* Data Availability
+* Rollmint
+* Ignite CLI
+* Cosmos SDK
+* Optimism (Coming Soon)
+
+In the future a modular game scaffolder in order to have a faster development in building 2d modular blockchain game.
+
+## To run the Desktop App 
+```
+flutter run -d macos
+```
 
 
 
@@ -25,17 +39,16 @@ PATH=$PATH:$(go env GOPATH)/bin
 
 curl -X GET http://52.26.186.106:26658/balance
 
-
 recipesd start --rollmint.aggregator true --rollmint.da_layer celestia --rollmint.da_config='{"base_url":"http://52.26.186.106:26658","timeout":60000000000,"gas_limit":6000000}' --rollmint.namespace_id 000000000000FFFF --rollmint.da_start_height 100783
 
 
 modulargamed start --rollmint.aggregator true --rollmint.da_layer celestia --rollmint.da_config='{"base_url":"http://52.26.186.106:26658","timeout":60000000000,"gas_limit":6000000}' --rollmint.namespace_id 000000000000FFFF --rollmint.da_start_height 100783
 
-./recipesd q recipes dishes 
+<!-- ./recipesd q recipes dishes 
 
 recipesd tx recipes create-recipe salad "spinach, mandarin oranges, sliced almonds, smoked gouda, citrus vinagrette" --from alice
 
-recipesd start --rollmint.aggregator true --rollmint.da_layer celestia --rollmint.da_config='{"base_url":"http://52.33.155.255:26658","timeout":60000000000,"gas_limit":6000000}' --rollmint.namespace_id 000000000000FFFF --rollmint.da_start_height 61513
+recipesd start --rollmint.aggregator true --rollmint.da_layer celestia --rollmint.da_config='{"base_url":"http://52.33.155.255:26658","timeout":60000000000,"gas_limit":6000000}' --rollmint.namespace_id 000000000000FFFF --rollmint.da_start_height 61513 -->
 
 sudo kill -9 $(sudo lsof -t -i:8080)
 

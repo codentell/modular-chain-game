@@ -50,6 +50,10 @@ class ModularGame extends FlameGame
     Artboard metamaskArtboard =
         await loadArtboard(RiveFile.asset('assets/metamask.riv'));
 
+
+        Artboard gmArtboard =
+        await loadArtboard(RiveFile.asset('assets/gm.riv'));
+
     // Artboard hexagonArtboard =
     //     await loadArtboard(RiveFile.asset('assets/hexagon.riv'));
 
@@ -95,7 +99,7 @@ class ModularGame extends FlameGame
     camera.followComponent(_player, worldBounds: Map.bounds);
 
      for (var i = 0; i < 30; i++) {
-        add(Rock(Vector2(Map.genCoord(), Map.genCoord()), metamaskArtboard));
+        add(Rock(Vector2(Map.genCoord(), Map.genCoord()), gmArtboard));
      }
 
     // add(Rock(Vector2(-120.0, 40.0), metamaskArtboard));
