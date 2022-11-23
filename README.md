@@ -11,7 +11,7 @@ Using `Flutter` and `Dart` to create the blockchain game that is modular in `Web
 
 * `Dart` 2.18.4
 * `Flutter`  3.3.8
-* Go version 1.18
+* `Go` 1.18
 
 What components of the `Celestia stack` does it interact with?
 The components of the `Celestia stack` for this project: 
