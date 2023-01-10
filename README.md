@@ -58,13 +58,24 @@ PATH=$PATH:$(go env GOPATH)/bin
 ./build/celestia light start --core.ip https://limani.celestia-devops.dev --core.grpc.port 9090
 ```
 
-curl -X GET http://XX.XX.XXX.XXX:26658/balance
+
+docker run -e NODE_TYPE=light ghcr.io/celestiaorg/celestia-node:0.6.1 celestia light start --core.ip https://rpc-mocha.pops.one --gateway --gateway.addr 127.0.0.1 --gateway.port 26659 --p2p.network mocha
+
+./celestia light start --core.ip https://rpc-mocha.pops.one --gateway --gateway.addr 127.0.0.1 --gateway.port 26659 --p2p.network mocha
+
+
+celestia light start --core.ip https://rpc-mocha.pops.one:9090 --core.grpc.port 9090 --gateway --gateway.addr 127.0.0.1 --gateway.port 26659 --p2p.network mocha
+
+
+curl -X GET http://127.0.0.1 :26658/balance
 
 ### Start the Game Rollup
 
 ```
-modulargamed start --rollmint.aggregator true --rollmint.da_layer celestia --rollmint.da_config='{"base_url":"http://XX.XX.XXX.XXX:26658","timeout":60000000000,"gas_limit":6000000}' --rollmint.namespace_id 000000000000FFFF --rollmint.da_start_height 100783
+modulargamed start --rollmint.aggregator true --rollmint.da_layer celestia --rollmint.da_config='{"base_url":"http://localhost:26658","timeout":60000000000,"gas_limit":6000000}' --rollmint.namespace_id 000000000000FFFF --rollmint.da_start_height 100783
 ```
+
+
 
 sudo kill -9 $(sudo lsof -t -i:8080)
 
